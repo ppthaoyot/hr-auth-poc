@@ -1,4 +1,5 @@
 using Casbin;
+using HRAuthorization.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,31 +17,14 @@ var policyPath = Path.Combine(builder.Environment.ContentRootPath, "..", "Casbin
 builder.Services.AddSingleton<IEnforcer>(_ => new Enforcer(modelPath, policyPath));
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("/authz/check", async (HttpContext ctx, IEnforcer enforcer, string dom, string obj, string act) =>
-{
-    var sub = ctx.User.Identity?.Name ?? string.Empty;
-    var allowed = await enforcer.EnforceAsync(sub, dom, obj, act);
-    return allowed ? Results.NoContent() : Results.StatusCode(StatusCodes.Status403Forbidden);
-}).RequireAuthorization();
-
-app.MapGet("/api/leave/{id}", async (HttpContext ctx, IEnforcer enforcer, string dom, string id) =>
-{
-    var sub = ctx.User.Identity?.Name ?? string.Empty;
-    var allowed = await enforcer.EnforceAsync(sub, dom, "api.leave", "read");
-    return allowed ? Results.Ok(new { Id = id }) : Results.StatusCode(StatusCodes.Status403Forbidden);
-}).RequireAuthorization();
-
-app.MapPost("/api/leave/{id}/approve", async (HttpContext ctx, IEnforcer enforcer, string dom, string id) =>
-{
-    var sub = ctx.User.Identity?.Name ?? string.Empty;
-    var allowed = await enforcer.EnforceAsync(sub, dom, "api.leave", "approve");
-    return allowed ? Results.NoContent() : Results.StatusCode(StatusCodes.Status403Forbidden);
-}).RequireAuthorization();
+app.MapControllers();
 
 app.Run();
