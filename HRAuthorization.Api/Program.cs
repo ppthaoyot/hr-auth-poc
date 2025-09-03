@@ -19,12 +19,17 @@ builder.Services.AddSingleton<IEnforcer>(_ => new Enforcer(modelPath, policyPath
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapControllers();
 
 app.Run();
