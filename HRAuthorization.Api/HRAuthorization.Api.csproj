@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Casbin.NET" Version="1.39.0" />
     <PackageReference Include="Casbin.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="../CasbinModel/rbac_with_domains.conf" CopyToOutputDirectory="PreserveNewest" />
