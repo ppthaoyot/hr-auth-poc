@@ -1,3 +1,4 @@
+
 # HR Authorization Proof of Concept
 
 This repository demonstrates separating authentication (AuthN) and authorization (AuthZ) in an ASP.NET Core **.NET 6** API using [Casbin](https://casbin.org/).
