@@ -1,0 +1,21 @@
+p, HRAdmin, line-1, api.leave, read
+p, HRAdmin, line-1, api.leave, approve
+p, HRAdmin, line-2, api.leave, read
+p, HRAdmin, line-2, api.leave, approve
+p, HRManager, line-1, api.leave, read
+p, HRManager, line-1, api.leave, approve
+p, HRManager, line-2, api.leave, read
+p, HRManager, line-2, api.leave, approve
+p, HRUser, line-1, api.leave, read
+p, HRUser, line-2, api.leave, read
+p, Auditor, line-1, api.leave, read
+p, Auditor, line-2, api.leave, read
+
+g, alice, HRAdmin, line-1
+g, alice, HRAdmin, line-2
+g, bob, HRManager, line-1
+g, bob, HRManager, line-2
+g, cathy, HRUser, line-1
+g, cathy, HRUser, line-2
+g, dave, Auditor, line-1
+g, dave, Auditor, line-2

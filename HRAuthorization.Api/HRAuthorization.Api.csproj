@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Casbin.NET" Version="1.39.0" />
+    <PackageReference Include="Casbin.AspNetCore" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../CasbinModel/rbac_with_domains.conf" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../CasbinPolicy/policy.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
